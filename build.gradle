@@ -1,0 +1,41 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.5
+version = '1.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+    maven {
+        url "https://github.com/uranoplums/uranoplums/tree/master/build/maven"
+    }
+    maven {
+    // Atilika Open Source repository (for kuromoji)
+        url "http://www.atilika.org/nexus/content/repositories/atilika"
+    }
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile group: 'org.uranoplums', name: 'uranoplums', version: '1.+'
+    compile group: 'org.javassist', name: 'javassist', version: "3.20.0-GA"
+    compile group: 'com.foundationdb', name: 'fdb-sql-parser', version: '1.6.1'
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
